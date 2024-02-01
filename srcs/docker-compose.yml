@@ -39,7 +39,7 @@ services:
     container_name: wordpress
     build: ./requirements/wordpress/.
     depends_on:
-      - mariadb
+      - mariadb 
     volumes:
       - wordpress:/srv/www
     networks:
@@ -57,4 +57,38 @@ services:
         - .env
       networks:
         - inception
+      restart: always
+  
+  redis:
+      container_name: redis
+      build:  ./requirements/bonus/redis/.
+      depends_on:
+        - wordpress
+      volumes:
+        - wordpress:/var/www/html
+      networks:
+        - inception
+      restart: always
+  ftp:
+      container_name: ftp
+      build: ./requirements/bonus/ftp/.
+      networks:
+        - inception
+      depends_on:
+        - wordpress
+      volumes:
+        - wordpress:/home/samaqloftp/ftp
+      ports:
+        - "21:21"
+        - "2020-2030:2020-2030"
+      env_file:
+        - .env
+      restart: always
+  adminer:
+      container_name: adminer
+      build: ./requirements/bonus/adminer/.
+      networks:
+        - inception
+      ports:
+        - "8080:8080"
       restart: always
