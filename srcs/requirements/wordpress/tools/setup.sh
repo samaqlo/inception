@@ -1,13 +1,14 @@
 #!/bin/sh
 
 mkdir /srv/www
-apk update && apk add curl 
+apk update && apk add curl
 rm -rf /srv/www/*
-apk add php php-fpm php-mysqli mysql-client php-phar php-cgi php-fileinfo php-json php-curl php-dom php-iconv php-session php-exif php-mbstring php-openssl php-xml php-tokenizer
+apk add php82 php82-fpm php82-mysqli mysql-client php82-phar php82-cgi php82-fileinfo php82-json php82-curl php82-dom php82-iconv php82-session php82-exif php82-mbstring php82-openssl php82-xml php82-tokenizer
 cd /srv/www
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 mv  wp-cli.phar /usr/local/bin/wp
+cp /usr/bin/php82 /usr/bin/php
 wp core download --path=/srv/www/
 cp /srv/www/wp-config-sample.php /srv/www/wp-config-sample_backup.php
 mv /srv/www/wp-config-sample.php /srv/www/wp-config.php

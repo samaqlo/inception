@@ -1,10 +1,8 @@
-FROM alpine:edge
+FROM alpine:3.18.6
 
 COPY tools/setup.sh /tmp
 COPY tools/vsftpd.conf  /tmp
 
 RUN chmod +x /tmp/setup.sh
-
-EXPOSE 21
 
 CMD [ "/tmp/setup.sh" ]

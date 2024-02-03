@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.18.6
 
 RUN mkdir /srv/www
 RUN apk update && apk add nginx && apk add openssl 
@@ -6,7 +6,5 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private
 
 COPY conf/default.conf ./tmp
 COPY tools/setup.sh ./tmp
-
-EXPOSE 443
 
 CMD sh tmp/setup.sh
