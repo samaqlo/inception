@@ -1,6 +1,6 @@
 #!/bin/sh
 
-apk update && apk add mariadb mariadb-client
+apk update && apk add mariadb
 mkdir -p /run/mysqld
 mkdir -p /var/lib/mysql
 rm -rf /var/lib/mysql/*
